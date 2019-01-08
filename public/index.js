@@ -26,6 +26,7 @@ const bars = [{
 //The `price` is updated from step 1 and 2
 //The `commission` is updated from step 3
 //The `options` is useful from step 4
+
 const events = [{
   'id': 'bba9500c-fd9e-453f-abf1-4cd8f52af377',
   'booker': 'esilv-bde',
@@ -35,7 +36,8 @@ const events = [{
   'options': {
     'deductibleReduction': false
   },
-  'price': 0,
+
+  'price': 0 ,
   'commission': {
     'insurance': 0,
     'treasury': 0,
@@ -145,6 +147,18 @@ const actors = [{
     'amount': 0
   }]
 }];
+
+function priceUpdate(){
+  for( const evt of events ) {
+    for( const bar of bars)  {
+      if(bar.id === evt.barId) {
+        evt.price = evt.time * bar.pricePerHour + evt.persons * bar.pricePerPerson;
+      }
+    }
+  }
+};
+
+priceUpdate();
 
 console.log(bars);
 console.log(events);
