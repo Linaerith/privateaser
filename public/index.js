@@ -149,9 +149,6 @@ const actors = [{
 }];
 
 
-
-
-
 function priceUpdate(){
   for( const evt of events ) {
     if(evt.persons<11){
@@ -189,7 +186,20 @@ function priceUpdate(){
   }
 };
 
+function CommissionPrice(){
+   for(const evt of events){
+    let com = evt.price * 0.3;
+    let ins = com * 0.5;
+    let trea = evt.persons;
+    let privcom = com - ins - trea;
+    evt.commission.insurance = ins;
+    evt.commission.treasury = trea;
+    evt.commission.privateaser = privcom ;
+  }
+}
+
 priceUpdate();
+CommissionPrice();
 
 console.log(bars);
 console.log(events);
