@@ -196,10 +196,22 @@ function CommissionPrice(){
     evt.commission.treasury = trea;
     evt.commission.privateaser = privcom ;
   }
-}
+};
+
+function deductible()
+{
+  for(const evt of events){
+    if(evt.options.deductibleReduction === true)
+    {
+      evt.price += evt.persons;
+      evt.commission.privateaser += evt.persons;
+    }
+  }
+};
 
 priceUpdate();
 CommissionPrice();
+deductible();
 
 console.log(bars);
 console.log(events);
