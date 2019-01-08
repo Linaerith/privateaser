@@ -149,6 +149,16 @@ const actors = [{
 }];
 
 
+function getBar(id)
+{
+  return bars.find(bar => bar.id === id);
+}
+
+function getEvent(id)
+{
+  return events.find(evt => evt.id === id);
+}
+
 function priceUpdate(){
   for( const evt of events ) {
     if(evt.persons<11){
@@ -209,9 +219,31 @@ function deductible()
   }
 };
 
+function Payment()
+{
+  for(const act of actors){
+    let evt = getEvent(act.eventId);
+    for(const pay of act.payment){
+      if(pay.who === 'booker'){
+        pay.amount = evt.price;
+      }
+      if(pay.who === 'insurance'){
+        pay.amount = evt.commission.insurance;
+      }
+      if(pay.who === 'treasury'){
+        pay.amount = evt.commission.treasury;
+      }
+      if(pay.who === 'privateaser'){
+        pay.amount = evt.commission.privateaser;
+      }
+    }
+  }
+};
+
 priceUpdate();
 CommissionPrice();
 deductible();
+Payment();
 
 console.log(bars);
 console.log(events);
