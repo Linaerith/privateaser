@@ -148,13 +148,44 @@ const actors = [{
   }]
 }];
 
+
+
+
+
 function priceUpdate(){
   for( const evt of events ) {
-    for( const bar of bars)  {
-      if(bar.id === evt.barId) {
-        evt.price = evt.time * bar.pricePerHour + evt.persons * bar.pricePerPerson;
-      }
-    }
+    if(evt.persons<11){
+     for( const bar of bars)  {
+       if(bar.id === evt.barId) {
+         evt.price = evt.time * bar.pricePerHour + evt.persons * bar.pricePerPerson;
+       }
+     }
+   }
+   else{
+     if(evt.persons < 21) {
+       for( const bar of bars)  {
+         if(bar.id === evt.barId) {
+           evt.price = evt.time * bar.pricePerHour + evt.persons * bar.pricePerPerson* 0.9;
+         }
+       }
+     }
+     else {
+       if(evt.persons < 61) {
+         for( const bar of bars)  {
+           if(bar.id === evt.barId) {
+             evt.price = evt.time * bar.pricePerHour + evt.persons * bar.pricePerPerson* 0.7;
+           }
+         }
+       }
+       else{
+         for( const bar of bars)  {
+           if(bar.id === evt.barId) {
+             evt.price = evt.time * bar.pricePerHour + evt.persons * bar.pricePerPerson* 0.5;
+           }
+         }
+       }
+     }
+   }
   }
 };
 
